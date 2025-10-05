@@ -27,6 +27,7 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000")
+ALLOWED_ORIGINS_REGEX = os.getenv("ALLOWED_ORIGINS_REGEX", "").strip()
 PORT = os.getenv("PORT", "3001")  # Informational, server runner config uses this externally
 
 # FastAPI application metadata and tags for OpenAPI
@@ -48,6 +49,7 @@ allowed_origins: List[str] = [o.strip() for o in ALLOWED_ORIGINS.split(",") if o
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
+    allow_origin_regex=ALLOWED_ORIGINS_REGEX or None,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
