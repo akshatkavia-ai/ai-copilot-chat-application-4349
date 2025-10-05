@@ -1,1 +1,3 @@
-# ai-copilot-chat-application-4349
+# Project Repository
+
+This is the initial README file for the project.
